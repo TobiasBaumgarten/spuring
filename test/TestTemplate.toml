@@ -1,0 +1,21 @@
+name = "test"
+description = "pony"
+explonation = "rainbow"
+
+[folders]
+src = "{{ project }}"
+test = "testfolder"
+
+
+[files]
+pyinit = { path = "{{project}}/__init__.py" }
+testTemplate = { path = "test/Test{{project | title }}.py", content = "_obj:testTemplate" }
+
+
+[content]
+testTemplate = """
+import unittest
+"""
+
+[scripts]
+venv = ".venv"

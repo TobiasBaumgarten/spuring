@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spuring"
+version = "0.0.1"
+dependencies = [
+    "Jinja2==3.1.2","python_version<'3.8'"
+]
