@@ -6,5 +6,5 @@ build-backend = "setuptools.build_meta"
 name = "spuring"
 version = "0.0.1"
 dependencies = [
-    "Jinja2==3.1.2","python_version<'3.8'"
+    "Jinja2==3.1.2","python_version>'3.8'"
 ]
