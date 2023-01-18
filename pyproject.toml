@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["spruring"]
+where = ["spuring"]
 
 [tool.setuptools.package-data]
 "*" = ["*.toml"]
