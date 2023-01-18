@@ -1,10 +1,11 @@
 import os
 import sys
 from pathlib import Path
-from template import TemplateManager, Template
+
+from spuring.template import Template, TemplateManager
 
 
-def create_template(name: str, out: str=None):
+def create_template(name: str, out: str = None):
     if out != None:
         wd = create_wd(out)
         manager = TemplateManager(out)
@@ -12,7 +13,7 @@ def create_template(name: str, out: str=None):
         wd = Path().cwd()
         manager = TemplateManager(Path().cwd().name)
     temp = manager[name]
-    
+
     create_folders(temp, wd)
     create_files(temp, wd)
     run_scripts(temp, wd)
@@ -52,7 +53,7 @@ def run_scripts(template: Template, wd: Path):
         os.system(f"{exe} -m venv {dir}")
         if "pip" in template.scripts:
             if os.name == "nt":
-                exe = dir /"Scripts" / "python.exe"
+                exe = dir / "Scripts" / "python.exe"
                 req = wd / template.scripts["pip"]
                 print(exe)
                 os.system(f"{exe} -m pip install -U pip")
@@ -65,6 +66,7 @@ def run_scripts(template: Template, wd: Path):
 
     if "code" in template.scripts:
         os.system(f"code {wd}")
+
 
 def _load_content(crypt_name: str, template: Template) -> str:
     name = crypt_name.split("_obj:")[1]

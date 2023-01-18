@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
-from template import TemplateManager
-import creation
+from spuring.template import TemplateManager
+import spuring.creation
 
 description = """
 This is a Templatebuilder for your projects
@@ -44,7 +44,7 @@ def procced_args(args):
             show_explonation(args.template)
             return
         # else create!
-        creation.create_template(args.template, args.outdir)
+        spuring.creation.create_template(args.template, args.outdir)
 
 
 if __name__ == "__main__":
