@@ -11,6 +11,7 @@ _TEMPLATEATTRIBUTES = [
     "content",
     "explonation",
     "scripts",
+    "project"
 ]
 
 
@@ -24,7 +25,8 @@ class Template:
     folders: dict
     content: dict
     explonation: str
-    scripts: str
+    scripts: dict
+    project: str
 
     def __init__(self, input_dic) -> None:
         for attr in _TEMPLATEATTRIBUTES:
@@ -72,6 +74,7 @@ class TemplateManager:
                               autoescape=select_autoescape())
             template = env.get_template(path.name)
             toml_dict = tomllib.loads(template.render(project=self.name))
+            toml_dict["project"] = self.name
             if "name" in toml_dict:
                 self.templates.append(Template(toml_dict))
 

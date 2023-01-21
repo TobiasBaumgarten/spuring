@@ -1,0 +1,28 @@
+{% extends "base.toml" %}
+{% block base %}
+name = "flask"
+description = "creates a default flask project"
+explonation = "A simple project setup with flask and autopep8"
+
+[scripts]
+venv = ".venv"
+pip = "requirements.txt"
+{% endblock %}
+
+{% block files %}
+pyinit.content = "_obj:init"
+req = {path="requirements.txt", content="flask"}
+{% endblock %}
+
+{% block content %}
+init = """
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+"""
+{% endblock %}
+

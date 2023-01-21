@@ -1,5 +1,5 @@
 import importlib
-from code import interact
+
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -7,6 +7,7 @@ from spuring.template import Template, TemplateManager
 
 
 SCRIPT_PATH = Path(__file__).parent / "scripts"
+
 
 def create_template(name: str, out: str | None = None):
     if out != None:
@@ -60,9 +61,19 @@ def _check_and_create_folder(path: Path):
         path.parent.mkdir()
 
 
-def run_scripts(template: Template, wd: Path):
+def _load_scripts():
+    result = {}
     for plugin_file in SCRIPT_PATH.glob("*.py"):
         name = f"{__package__}.scripts.{plugin_file.stem}"
         plugin = importlib.import_module(name)
-        plugin.process(template,wd)
+        result[plugin_file.stem] = plugin.process
+    return result
 
+
+def run_scripts(template: Template, wd: Path):
+    if template.scripts == None or len(template.scripts) <= 0:
+        return
+    scripts = _load_scripts()
+    for name, value in template.scripts.items():
+        if name in scripts:
+            scripts[name](template, wd)

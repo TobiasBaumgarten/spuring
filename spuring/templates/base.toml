@@ -1,0 +1,30 @@
+{% block base %}{% endblock %}
+
+[folders]
+src = "{{ project }}"
+test = "test"
+{% block folders %}{% endblock %}
+
+[files]
+dev_requirements = { path = "requirements-dev.txt", content = "_obj:dev" }
+readme= { path = "README.md", content = "# {{project}}" }
+testTemplate = { path = "test/Test{{project | title }}.py", content = "_obj:testTemplate" }
+pyinit.path = "{{project}}/__init__.py"
+{% block files %}{% endblock %}
+
+[content]
+dev = """
+autopep8
+"""
+testTemplate = """
+import unittest
+
+class Test{{project}}(unittest.TestCase):
+
+    def test_first(self):
+        pass
+
+if __name__ == "__main__":
+    unittest.main()
+"""
+{% block content %}{% endblock %}

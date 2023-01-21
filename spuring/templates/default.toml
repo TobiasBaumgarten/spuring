@@ -1,36 +1,25 @@
+#jinja2 toml
+
+
+{% extends "base.toml" %}
+{% block base %}
+
 name = "default"
 description = "creates a default python project"
-explonation = "A long explonation for chatterboxes"
-
-[folders]
-src = "{{ project }}"
-test = "test"
-
-
-[files]
-pyinit = { path = "{{project}}/__init__.py" }
-dev_requirements = { path = "requirements-dev.txt", content = "_obj:dev" }
-readme= { path = "README.md", content = "# {{project}}" }
-testTemplate = { path = "test/Test{{project | title }}.py", content = "_obj:testTemplate" }
-
-
-[content]
-dev = """
-autopep8
-"""
-
-testTemplate = """
-import unittest
-
-class Test{{project}}(unittest.TestCase):
-
-    def test_first(self):
-        pass
-
-if __name__ == "__main__":
-    unittest.main()
-"""
+explonation = "A simple project setup with autopep8"
 
 [scripts]
 venv = ".venv"
 pip = "requirements-dev.txt"
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
