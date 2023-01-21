@@ -16,7 +16,7 @@ testTemplate = { path = "test/Test{{project | title }}.py", content = "_obj:test
 
 [content]
 dev = """
-black
+autopep8
 """
 
 testTemplate = """

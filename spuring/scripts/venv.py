@@ -23,7 +23,10 @@ def process(template: Template, wd: Path):
     exe = sys.executable
     if venv:
         dir = wd / template.scripts["venv"]
+        # setup the path - windows and linux path are different
         dir /= "Scripts" if os.name == "nt" else "bin"
+        # update pip
         os.system(f"{exe} -m pip install -U pip")
+        # load the value from the pip attribute and run
         req = wd / template.scripts['pip']
         os.system(f"{exe} -m pip install -r {req}")

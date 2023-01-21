@@ -1,5 +1,5 @@
 import tomllib
-from jinja2 import Environment, BaseLoader
+from jinja2 import Environment, BaseLoader, PackageLoader, select_autoescape
 import pathlib
 
 
@@ -21,7 +21,7 @@ class Template:
     name: str
     description: str
     files: dict[dict]
-    folders:dict
+    folders: dict
     content: dict
     explonation: str
     scripts: str
@@ -41,6 +41,7 @@ class Template:
 
     def __repr__(self) -> str:
         return f"<{self.name}>"
+
 
 class TemplateManager:
     name: str
@@ -67,12 +68,12 @@ class TemplateManager:
     def _load_templates(self):
         for path in self.template_paths:
             file = pathlib.Path(path)
-            temp_string = Environment(loader=BaseLoader).from_string(
-                file.read_text("utf-8")
-            )
-            temp_data = temp_string.render(project=self.name)
-            toml_dict = tomllib.loads(temp_data)
-            self.templates.append(Template(toml_dict))
+            env = Environment(loader=PackageLoader(__package__),
+                              autoescape=select_autoescape())
+            template = env.get_template(path.name)
+            toml_dict = tomllib.loads(template.render(project=self.name))
+            if "name" in toml_dict:
+                self.templates.append(Template(toml_dict))
 
     def __getitem__(self, key: str):
         return next(t for t in self.templates if t.name == key)
