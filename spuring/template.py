@@ -3,7 +3,7 @@ from jinja2 import Environment, BaseLoader
 import pathlib
 
 
-_template_attr = [
+_TEMPLATEATTRIBUTES = [
     "name",
     "description",
     "files",
@@ -13,11 +13,8 @@ _template_attr = [
     "scripts",
 ]
 
-_to_list_attr = [
-    "folders", "files"
-]
 
-_templates_dir = pathlib.Path(__file__).parent / "templates"
+_TEMPLATEDIR = pathlib.Path(__file__).parent / "templates"
 
 
 class Template:
@@ -30,7 +27,7 @@ class Template:
     scripts: str
 
     def __init__(self, input_dic) -> None:
-        for attr in _template_attr:
+        for attr in _TEMPLATEATTRIBUTES:
             self._from_dict(input_dic, attr)
 
     def _from_dict(self, d: dict, key: str) -> any:
@@ -54,7 +51,7 @@ class TemplateManager:
 
     def __init__(self, name: str, template_path=None) -> None:
         if template_path == None:
-            self.template_dir = _templates_dir
+            self.template_dir = _TEMPLATEDIR
 
         self.name = name
         self.templates = []
@@ -62,6 +59,7 @@ class TemplateManager:
         self._load_templates()
 
     def _load_template_paths(self):
+        """ Load all files/templates that are in the folder of templates """
         self.template_paths = []
         for file in self.template_dir.glob("*.toml"):
             self.template_paths.append(file)
