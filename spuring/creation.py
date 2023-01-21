@@ -1,11 +1,14 @@
-import os
-import sys
+import importlib
+from code import interact
 from pathlib import Path
+from typing import Any, Protocol
 
 from spuring.template import Template, TemplateManager
 
 
-def create_template(name: str, out: str = None):
+SCRIPT_PATH = Path(__file__).parent / "scripts"
+
+def create_template(name: str, out: str | None = None):
     if out != None:
         wd = create_wd(out)
         manager = TemplateManager(out)
@@ -45,29 +48,6 @@ def create_files(template: Template, wd: Path):
         f.write_text(content)
 
 
-def run_scripts(template: Template, wd: Path):
-    exe = sys.executable
-    if "venv" in template.scripts:
-        print(exe)
-        dir = wd / template.scripts["venv"]
-        os.system(f"{exe} -m venv {dir}")
-        if "pip" in template.scripts:
-            if os.name == "nt":
-                exe = dir / "Scripts" / "python.exe"
-                req = wd / template.scripts["pip"]
-                print(exe)
-                os.system(f"{exe} -m pip install -U pip")
-                os.system(f"{exe} -m pip install -r {req}")
-    else:
-        if "pip" in template.scripts:
-            req = wd / template.scripts["pip"]
-            os.system(f"{exe} -m pip install -U pip")
-            os.system(f"{exe} -m pip install -r {req}")
-
-    if "code" in template.scripts:
-        os.system(f"code {wd}")
-
-
 def _load_content(crypt_name: str, template: Template) -> str:
     name = crypt_name.split("_obj:")[1]
     return template.content[name]
@@ -78,3 +58,35 @@ def _check_and_create_folder(path: Path):
         if not path.parent.parent.exists():
             _check_and_create_folder(path.parent)
         path.parent.mkdir()
+
+# 
+# class IPluginScript(Protocol):
+#     def process(self, args: Any):
+#         """ The Script das is proccesd """
+
+def run_scripts(template: Template, wd: Path):
+    for plugin_file in SCRIPT_PATH.glob("*.py"):
+        name = f"{__package__}.scripts.{plugin_file.stem}"
+        plugin = importlib.import_module(name)
+        plugin.process(template,wd)
+# def run_scripts(template: Template, wd: Path):
+#     exe = sys.executable
+#     if "venv" in template.scripts:
+#         print(exe)
+#         dir = wd / template.scripts["venv"]
+#         os.system(f"{exe} -m venv {dir}")
+#         if "pip" in template.scripts:
+#             if os.name == "nt":
+#                 exe = dir / "Scripts" / "python.exe"
+#                 req = wd / template.scripts['pip']
+#                 print(exe)
+#                 os.system(f"{exe} -m pip install -U pip")
+#                 os.system(f"{exe} -m pip install -r {req}")
+#     else:
+#         if "pip" in template.scripts:
+#             req = wd / template.scripts["pip"]
+#             os.system(f"{exe} -m pip install -U pip")
+#             os.system(f"{exe} -m pip install -r {req}")
+
+#     if "code" in template.scripts:
+#         os.system(f"code {wd}")
