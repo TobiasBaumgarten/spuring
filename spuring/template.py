@@ -58,15 +58,15 @@ class TemplateManager:
 
         self.name = name
         self.templates = []
-        self.load_template_paths()
-        self.load_templates()
+        self._load_template_paths()
+        self._load_templates()
 
-    def load_template_paths(self):
+    def _load_template_paths(self):
         self.template_paths = []
         for file in self.template_dir.glob("*.toml"):
             self.template_paths.append(file)
 
-    def load_templates(self):
+    def _load_templates(self):
         for path in self.template_paths:
             file = pathlib.Path(path)
             temp_string = Environment(loader=BaseLoader).from_string(
