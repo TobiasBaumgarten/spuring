@@ -59,34 +59,10 @@ def _check_and_create_folder(path: Path):
             _check_and_create_folder(path.parent)
         path.parent.mkdir()
 
-# 
-# class IPluginScript(Protocol):
-#     def process(self, args: Any):
-#         """ The Script das is proccesd """
 
 def run_scripts(template: Template, wd: Path):
     for plugin_file in SCRIPT_PATH.glob("*.py"):
         name = f"{__package__}.scripts.{plugin_file.stem}"
         plugin = importlib.import_module(name)
         plugin.process(template,wd)
-# def run_scripts(template: Template, wd: Path):
-#     exe = sys.executable
-#     if "venv" in template.scripts:
-#         print(exe)
-#         dir = wd / template.scripts["venv"]
-#         os.system(f"{exe} -m venv {dir}")
-#         if "pip" in template.scripts:
-#             if os.name == "nt":
-#                 exe = dir / "Scripts" / "python.exe"
-#                 req = wd / template.scripts['pip']
-#                 print(exe)
-#                 os.system(f"{exe} -m pip install -U pip")
-#                 os.system(f"{exe} -m pip install -r {req}")
-#     else:
-#         if "pip" in template.scripts:
-#             req = wd / template.scripts["pip"]
-#             os.system(f"{exe} -m pip install -U pip")
-#             os.system(f"{exe} -m pip install -r {req}")
 
-#     if "code" in template.scripts:
-#         os.system(f"code {wd}")
