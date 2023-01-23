@@ -1,6 +1,6 @@
 name = "test"
 description = "pony"
-explonation = "rainbow"
+narrative = "rainbow"
 
 [folders]
 src = "{{ project }}"

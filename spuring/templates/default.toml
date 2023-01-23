@@ -6,7 +6,7 @@
 
 name = "default"
 description = "creates a default python project"
-explonation = "A simple project setup with autopep8"
+narrative = "A simple project setup with autopep8"
 
 [scripts]
 venv = ".venv"

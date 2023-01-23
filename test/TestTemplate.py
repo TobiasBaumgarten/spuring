@@ -12,7 +12,7 @@ class TestTemplate(unittest.TestCase):
     def test_meta(self):
         self.assertEqual(self.template.name, "test")
         self.assertEqual(self.template.description, "pony")
-        self.assertEqual(self.template.explonation, "rainbow")
+        self.assertEqual(self.template.narrative, "rainbow")
 
     def test_folders(self):
         self.assertEqual(self.template.folders["src"], "{{ project }}")

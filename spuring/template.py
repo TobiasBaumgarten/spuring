@@ -9,7 +9,7 @@ _TEMPLATEATTRIBUTES = [
     "files",
     "folders",
     "content",
-    "explonation",
+    "narrative",
     "scripts",
     "project"
 ]
@@ -24,7 +24,7 @@ class Template:
     files: dict[dict]
     folders: dict
     content: dict
-    explonation: str
+    narrative: str
     scripts: dict
     project: str
 

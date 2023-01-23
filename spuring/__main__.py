@@ -33,9 +33,9 @@ def list():
     return result
 
 
-def show_explonation(name: str):
+def show_narrative(name: str):
     manager = TemplateManager("")
-    print(manager[name].explonation)
+    print(manager[name].narrative)
 
 
 def print_template_path():
@@ -51,9 +51,9 @@ def procced_args(args):
     # proceed template creation
     if args.template:
 
-        # if description is choosed, show explonation and return
+        # if description is choosed, show narrative and return
         if args.description:
-            show_explonation(args.template)
+            show_narrative(args.template)
             return
         # else create!
         spuring.creation.create_template(args.template, args.outdir)

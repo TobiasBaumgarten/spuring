@@ -2,7 +2,7 @@
 {% block base %}
 name = "flask"
 description = "creates a default flask project"
-explonation = "A simple project setup with flask and autopep8"
+narrative = "A simple project setup with flask and autopep8"
 
 [scripts]
 venv = ".venv"
