@@ -1,9 +1,7 @@
-
-
 import os
 from pathlib import Path
 import sys
-from spuring.template import Template
+from spuring import Template
 
 
 def process(template: Template, wd: Path):

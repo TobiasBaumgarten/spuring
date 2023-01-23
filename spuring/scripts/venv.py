@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 from typing import Any
 
-from spuring.template import Template
+from spuring import Template
 
 
 def process(template: Template, wd: Path):
