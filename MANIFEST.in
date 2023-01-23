@@ -1,1 +1,1 @@
-include spuring/templates/default.toml
+include spuring/templates/*.toml
