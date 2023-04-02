@@ -9,7 +9,7 @@ authors = [
 ]
 description = "Create a project folder. It can be self configurated"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.11"
 version = "0.0.3"
 dependencies = [
     "Jinja2==3.1.2"
