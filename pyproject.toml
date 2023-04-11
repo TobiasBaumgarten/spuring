@@ -9,13 +9,8 @@ authors = [
 ]
 description = "Create a project folder. It can be self configurated"
 readme = "README.md"
-<<<<<<< HEAD
 requires-python = ">=3.7"
 version = "0.0.4"
-=======
-requires-python = ">=3.11"
-version = "0.0.3"
->>>>>>> 0d0818a06feb5348212694a01c2ae9581f911d91
 dependencies = [
     "Jinja2==3.1.2"
 ]
