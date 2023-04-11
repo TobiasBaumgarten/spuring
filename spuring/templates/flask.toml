@@ -5,7 +5,7 @@ description = "creates a default flask project"
 narrative = "A simple project setup with flask and autopep8"
 
 [scripts]
-venv = ".venv"
+venv = "venv"
 pip = "requirements.txt"
 {% endblock %}
 

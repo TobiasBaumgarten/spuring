@@ -9,7 +9,7 @@ description = "creates a default python project"
 narrative = "A simple project setup with autopep8"
 
 [scripts]
-venv = ".venv"
+venv = "venv"
 pip = "requirements-dev.txt"
 
 {% endblock %}
